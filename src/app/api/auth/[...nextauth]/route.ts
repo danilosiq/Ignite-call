@@ -4,7 +4,7 @@ import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
 
  
-export default function buildNextAuthOptions(): NextAuthOptions {
+function buildNextAuthOptions(): NextAuthOptions {
   return {
     adapter: PrismaAdapter(),
 
