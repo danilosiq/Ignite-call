@@ -3,8 +3,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
 
- 
-function buildNextAuthOptions(): NextAuthOptions {
+export function buildNextAuthOptions(): NextAuthOptions {
   return {
     adapter: PrismaAdapter(),
 
@@ -14,27 +13,25 @@ function buildNextAuthOptions(): NextAuthOptions {
         clientSecret: process.env.GOOGLE_SECRET!,
         authorization: {
           params: {
-            prompt:'consent',
-            access_type:'offline',
-            response_type:'code',
+            prompt: 'consent',
+            access_type: 'offline',
+            response_type: 'code',
             scope:
               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/calendar",
           },
         },
-        profile(profile: GoogleProfile){
-          return{
+        profile(profile: GoogleProfile) {
+          return {
             id: profile.sub,
-            name:profile.name,
-            username:'',
-            email:profile.email,
-            avatar_url:profile.picture,
-            bio:''
+            name: profile.name,
+            username: '',
+            email: profile.email,
+            avatar_url: profile.picture,
+            bio: ''
           }
         }
       }),
     ],
-
-    
 
     callbacks: {
       async signIn({ account }) {
@@ -46,8 +43,8 @@ function buildNextAuthOptions(): NextAuthOptions {
         return true;
       },
 
-      async session({session,user}){
-        return{
+      async session({ session, user }) {
+        return {
           ...session,
           user
         }
