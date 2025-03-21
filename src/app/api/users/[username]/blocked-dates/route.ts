@@ -3,10 +3,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { username: string } }
+  { params }: { params: Promise<{ username: string }> }
 ) {
   const { searchParams } = new URL(req.url);
-  const username = await params.username;
+  const {username} = await params;
   const year = searchParams.get("year");
   const month = searchParams.get("month");
 

@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { username: string } }
+  { params }: { params: Promise<{ username: string }> }
 ) {
   const { searchParams } = new URL(req.url);
-  const username = params.username;
+  const {username} = await params;
   const date = searchParams.get("date");
 
   if (!date) {
