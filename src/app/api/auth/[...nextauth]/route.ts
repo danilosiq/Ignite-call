@@ -53,5 +53,6 @@ export function buildNextAuthOptions(): NextAuthOptions {
   };
 }
 
-const handler = NextAuth(buildNextAuthOptions());
-export { handler as GET, handler as POST };
+export default async function auth() {
+  return NextAuth(buildNextAuthOptions())
+}
