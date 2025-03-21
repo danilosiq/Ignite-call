@@ -2,7 +2,7 @@ import { PrismaAdapter } from "@/lib/nextAuth/prisma-adapter";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
-
+// Função para construir as opções do NextAuth
 export function buildNextAuthOptions(): NextAuthOptions {
   return {
     adapter: PrismaAdapter(),
@@ -53,6 +53,8 @@ export function buildNextAuthOptions(): NextAuthOptions {
   };
 }
 
-export default async function auth() {
-  return NextAuth(buildNextAuthOptions())
-}
+// Cria o manipulador do NextAuth
+const handler = NextAuth(buildNextAuthOptions());
+
+// Exporta os métodos HTTP suportados
+export { handler as GET, handler as POST };
